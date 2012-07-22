@@ -23,6 +23,10 @@ Tagbar              nmap <F8> :TagbarToggle<CR>
     git submodule init
     git submodule update
 
+安装插件
+    #git submodule add 插件 Git 仓库地址 bundle/插件名字
+    git submodule add git://github.com/tpope/vim-markdown.git bundle/vim-markdown
+
 更新所有的plugin
     git submodule foreach git pull origin master
 

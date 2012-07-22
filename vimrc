@@ -1,53 +1,8 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" => pathogen config
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" => vundle config
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set nocp
-"filetype off
-"
-"set rtp+=~/.vim/bundle/vundle/
-"" 如果在windows下使用的话，设置为 
-"" set rtp+=$HOME/.vim/bundle/vundle/
-"call vundle#rc()
-"
-"" let Vundle manage Vundle
-"" required! 
-"Bundle 'a.vim'
-"Bundle 'c.vim'
-""Bundle 'Conque-Shell'
-"Bundle 'DoxygenToolkit.vim'
-"Bundle 'FencView.vim'
-"Bundle 'fugitive.vim'
-"Bundle 'gmarik/vundle'
-""Bundle 'minibufexplorer'
-"Bundle 'OmniCppComplete'
-"Bundle 'snipMate'
-"Bundle 'SuperTab-continued.'
-"Bundle 'Tagbar'
-"Bundle 'The-NERD-tree'
-"Bundle 'winmanager'
-"Bundle 'https://github.com/fholgado/minibufexpl.vim.git'
-"
-"filetype plugin indent on     " required!
-""
-"" non github reposo
-"" 非github的插件，可以直接使用其git地址
-"" Bundle 'git://git.wincent.com/command-t.git'
-"" ...
-""
-"" Brief help
-"" :BundleList          - list configured bundles
-"" :BundleInstall(!)    - install(update) bundles
-"" :BundleSearch(!) foo - search(or refresh cache first) for foo
-"" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"" vundle主要就是上面这个四个命令，例如BundleInstall是全部重新安装，BundleInstall!则是更新
-"" 一般安装插件的流程为，先BundleSearch一个插件，然后在列表中选中，按i安装
-"" 安装完之后，在vimrc中，添加Bundle 'XXX'，使得bundle能够加载，这个插件，同时如果
-"" 需要配置这个插件，也是在vimrc中设置即可
-"" see :h vundle for more details or wiki for FAQ
-"" NOTE: comments after Bundle command are not allowed..
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => function
