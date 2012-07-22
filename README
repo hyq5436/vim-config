@@ -29,3 +29,7 @@ Tagbar              nmap <F8> :TagbarToggle<CR>
 升级某个plugin
     cd ~/.vim/bundle/fugitive
     git pull origin master
+
+提交更改
+    cd ~/.vim
+    git push origin master
