@@ -1,3 +1,39 @@
 [submodule "bundle/vim-pathogen"]
 	path = bundle/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+[submodule "bundle/a.vim"]
+	path = bundle/a.vim
+	url = https://github.com/vim-scripts/a.vim.git
+[submodule "bundle/c.vim"]
+	path = bundle/c.vim
+	url = https://github.com/vim-scripts/c.vim.git
+[submodule "bundle/DoxygenToolkit.vim"]
+	path = bundle/DoxygenToolkit.vim
+	url = https://github.com/vim-scripts/DoxygenToolkit.vim.git
+[submodule "bundle/fugitive.vim"]
+	path = bundle/fugitive.vim
+	url = https://github.com/vim-scripts/fugitive.vim.git
+[submodule "bundle/minibufexpl.vim"]
+	path = bundle/minibufexpl.vim
+	url = https://github.com/fholgado/minibufexpl.vim.git
+[submodule "bundle/OmniCppComplete"]
+	path = bundle/OmniCppComplete
+	url = https://github.com/vim-scripts/OmniCppComplete.git
+[submodule "bundle/snipMate"]
+	path = bundle/snipMate
+	url = https://github.com/vim-scripts/snipMate.git
+[submodule "bundle/SuperTab-continued"]
+	path = bundle/SuperTab-continued
+	url = https://github.com/vim-scripts/SuperTab-continued..git
+[submodule "bundle/Tagbar"]
+	path = bundle/Tagbar
+	url = https://github.com/vim-scripts/Tagbar.git
+[submodule "bundle/The-NERD-tree"]
+	path = bundle/The-NERD-tree
+	url = https://github.com/vim-scripts/The-NERD-tree.git
+[submodule "bundle/winmanager"]
+	path = bundle/winmanager
+	url = https://github.com/vim-scripts/winmanager.git
+[submodule "bundle/FencView.vim"]
+	path = bundle/FencView.vim
+	url = https://github.com/vim-scripts/FencView.vim.git
