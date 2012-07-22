@@ -1,0 +1,31 @@
+KEYBOARD
+a.vim               :A                              switch between .cpp and .h
+Bundle              :BundleList                     list configured bundles
+FencView            map <F2> :FencAutoDetect<cr>
+The-NERD-tree       :NERDTree
+Tagbar              nmap <F8> :TagbarToggle<CR>     
+                    map <leader>e                   edit vimrc file
+                    nmap <leader>w :w<cr>           save file
+                    nmap <leader>x :x<cr>           save file and exist
+                    set pastetoggle=<F3>
+
+删除submodule:
+    1. 从 .gitmodule 文件里面删掉关于 bundle/Tagbar的配置信息
+    2. git rm -cached bundle/Tagbar
+    3. 现在可以重新添加了
+
+下载vim配置文件
+    cd ~
+    git clone https://github.com/hyq5436/vim-config.git ~/.vim
+    ln -s ~/.vim/vimrc ~/.vimrc
+    #ln -s ~/.vim/gvimrc ~/.gvimrc
+    cd ~/.vim
+    git submodule init
+    git submodule update
+
+更新所有的plugin
+    git submodule foreach git pull origin master
+
+升级某个plugin
+    cd ~/.vim/bundle/fugitive
+    git pull origin master
