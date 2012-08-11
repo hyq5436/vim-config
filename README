@@ -1,13 +1,14 @@
 KEYBOARD
-a.vim               :A                              switch between .cpp and .h
-Bundle              :BundleList                     list configured bundles
-FencView            map <F2> :FencAutoDetect<cr>
+a.vim               :A                                      switch between .cpp and .h
+Bundle              :BundleList                             list configured bundles
+FencView            map <leader>a :FencAutoDetect<cr>
 The-NERD-tree       :NERDTree
-Tagbar              nmap <F8> :TagbarToggle<CR>     
-                    map <leader>e                   edit vimrc file
-                    nmap <leader>w :w<cr>           save file
-                    nmap <leader>x :x<cr>           save file and exist
-                    set pastetoggle=<F3>
+Tagbar              nmap \t :TagbarToggle<CR>     
+                    map <leader>e                           edit vimrc file
+                    nmap <leader>w :w<cr>                   save file
+                    nmap <leader>x :x<cr>                   save file and exist
+                    set pastetoggle=<leader>i
+                    nnoremap<silent> \n :NERDTreeToggle
 
 删除submodule:
     1. 从 .gitmodule 文件里面删掉关于 bundle/Tagbar的配置信息

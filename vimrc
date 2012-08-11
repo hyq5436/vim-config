@@ -3,6 +3,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
+" call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => function
@@ -20,6 +22,8 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set cursorline
+
 " Sets how many lines of history VIM has to remember
 set history=10000
 
@@ -36,13 +40,17 @@ set showcmd
 
 set modeline
 
+" support mouse
+set mouse=a
+
+
 " Set to auto read when a file is changed from the outside
 " set autoread
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = ";"
+let g:mapleader = ";"
 
 " Fast saving
 nmap <leader>w :w<cr>
@@ -60,8 +68,15 @@ if MySys() == "windows"
     autocmd! bufwritepost _vimrc source $vim/_vimrc
 elseif MySys() == "linux"
     autocmd! bufwritepost .vimrc source ~/.vimrc
+    autocmd! bufwritepost vimrc source ~/.vim/vimrc
 endif
 
+
+" miniBufExpl
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"let g:miniBufExplUseSingleClick = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -81,6 +96,7 @@ set ignorecase "Ignore case when searching
 set smartcase
 
 set hlsearch "Highlight search things
+set incsearch
 
 set showmatch "Show matching bracets when text indicator is over them
 set mat=2 "How many tenths of a second to blink
@@ -145,7 +161,7 @@ set si "Smart indet
 set wrap "Wrap lines
 set nopaste
 "Paste toggle - when pasting something in, don't indent.
-set pastetoggle=<F3>
+set pastetoggle=<lea
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs and buffers
@@ -188,51 +204,8 @@ au FileType python map <buffer> <leader>C ?class
 au FileType python map <buffer> <leader>D ?def
 
 """"""""""""""""""""""""""""""
-" => Plugins
+" => Plugins config 
 """"""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""
-"" => Tag list(replaced by Tagbar)
-"""""""""""""""""""""""""""""""
-"if MySys() == "windows"                "设定windows系统中ctags程序的位置
-"    let Tlist_Ctags_Cmd = 'ctags'
-"elseif MySys() == "linux"              "设定windows系统中ctags程序的位置
-"    let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-"endif
-"let Tlist_Show_One_File = 0            "不同时显示多个文件的tag，只显示当前文件的
-"let Tlist_File_Fold_Auto_Close=1       "非当前文件，函数列表折叠隐藏
-"let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口，则退出vim
-"let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口
-"let Tlist_Process_File_Always=1        "不是一直实时更新tags，因为没有必要
-"let Tlist_File_Fold_Auto_Close=1       "让当前不被编辑的文件的方法列表自动折叠起来，这样可以节约一些屏幕空间
-"map <silent> <F8> :TlistToggle<cr> 
-
-"""""""""""""""""""""""""""""""
-"" => Tagbar
-"""""""""""""""""""""""""""""""
-if MySys() == "windows"                "设定windows系统中ctags程序的位置
-    let g:tagbar_ctags_bin = 'ctags'
-elseif MySys() == "linux"              "设定windows系统中ctags程序的位置
-    let g:tagbar_ctags_bin = '/usr/bin/ctags'
-endif
-let g:tagbar_left = 0                   "在右侧窗口中显示taglist窗口
-let g:tagbar_autoclose = 0              "自动关闭
-let g:tagbar_sort = 1                   "排序
-"let g:tagbar_width = 40                "tagbar宽度
-nmap <F8> :TagbarToggle<CR>
-autocmd FileType c,cpp,java nested :TagbarOpen
-
-""""""""""""""""""""""""""""""
-" => ctags
-""""""""""""""""""""""""""""""
-" ctags -R -f ~/ctags/systags --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i /usr/include /usr/local/include
-" set tags=~/ctags/systags,~/ctags/ffmpeg,~/ctags/axel
-set tags=~/ctags/systags,~/ctags/axel,~/ctags/dlna.tags,~/ctags/busybox.tags,~/ctags/findutils.tags
-
-""""""""""""""""""""""""""""""
-" => C-support
-""""""""""""""""""""""""""""""
-
 """"""""""""""""""""""""""""""
 " => Bash-support
 """"""""""""""""""""""""""""""
@@ -245,26 +218,15 @@ au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 set completeopt=longest,menu 
 
 """"""""""""""""""""""""""""""
-" => FencView(auto detect file encoding)
+" => C-support
 """"""""""""""""""""""""""""""
-"关闭自动检测
-let g:fencview_autodetect=0
-map <F2> :FencAutoDetect<cr>
 
 """"""""""""""""""""""""""""""
-" => OmniCppComplete
+" => ctags
 """"""""""""""""""""""""""""""
-" let OmniCpp_NamespaceSearch = 1
-" let OmniCpp_GlobalScopeSearch = 1
-" let OmniCpp_ShowAccess = 1
-" let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-" let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-" let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-" let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-" let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" " automatically open and close the popup menu / preview window
-" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-" set completeopt=menuone,menu,longest,preview
+" ctags -R -f ~/ctags/systags --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i /usr/include /usr/local/include
+" set tags=~/ctags/systags,~/ctags/ffmpeg,~/ctags/axel
+set tags=~/ctags/systags,~/ctags/axel,~/ctags/dlna.tags,~/ctags/busybox.tags,~/ctags/findutils.tags
 
 """"""""""""""""""""""""""""""
 " => DoxygenToolkit
@@ -286,3 +248,45 @@ let g:DoxygenToolkit_authorName="hu_yinqiu"
 " let g:DoxygenToolkit_licenseTag="My own license"   <-- Does not end with
 " "\<enter>"
 
+""""""""""""""""""""""""""""""
+" => FencView(auto detect file encoding)
+""""""""""""""""""""""""""""""
+"关闭自动检测
+let g:fencview_autodetect=0
+map <leader>a :FencAutoDetect<cr>
+
+"""""""""""""""""""""""""""""""
+"" => NERDTree
+"""""""""""""""""""""""""""""""
+" use F2 for NERTree
+nnoremap <silent> \n :NERDTreeToggle<cr>
+
+""""""""""""""""""""""""""""""
+" => OmniCppComplete
+""""""""""""""""""""""""""""""
+" let OmniCpp_NamespaceSearch = 0
+" let OmniCpp_GlobalScopeSearch = 1
+" let OmniCpp_ShowAccess = 1
+" let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+" let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+" let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+" let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+" let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" " automatically open and close the popup menu / preview window
+" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+" set completeopt=menuone,menu,longest,preview
+
+"""""""""""""""""""""""""""""""
+"" => Tagbar
+"""""""""""""""""""""""""""""""
+if MySys() == "windows"                "设定windows系统中ctags程序的位置
+    let g:tagbar_ctags_bin = 'ctags'
+elseif MySys() == "linux"              "设定windows系统中ctags程序的位置
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'
+endif
+let g:tagbar_left = 0                   "在右侧窗口中显示taglist窗口
+let g:tagbar_autoclose = 0              "自动关闭
+let g:tagbar_sort = 0                   "排序
+"let g:tagbar_width = 40                "tagbar宽度
+nmap \t :TagbarToggle<CR>
+"autocmd FileType c,cpp,java nested :TagbarOpen
