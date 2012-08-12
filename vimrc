@@ -161,7 +161,7 @@ set si "Smart indet
 set wrap "Wrap lines
 set nopaste
 "Paste toggle - when pasting something in, don't indent.
-set pastetoggle=<lea
+set pastetoggle=<leader>a
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs and buffers
@@ -258,7 +258,7 @@ map <leader>a :FencAutoDetect<cr>
 """""""""""""""""""""""""""""""
 "" => NERDTree
 """""""""""""""""""""""""""""""
-" use F2 for NERTree
+" use \n for NERTree
 nnoremap <silent> \n :NERDTreeToggle<cr>
 
 """"""""""""""""""""""""""""""

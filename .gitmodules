@@ -31,9 +31,12 @@
 [submodule "bundle/The-NERD-tree"]
 	path = bundle/The-NERD-tree
 	url = https://github.com/vim-scripts/The-NERD-tree.git
-[submodule "bundle/winmanager"]
-	path = bundle/winmanager
-	url = https://github.com/vim-scripts/winmanager.git
 [submodule "bundle/FencView.vim"]
 	path = bundle/FencView.vim
 	url = https://github.com/vim-scripts/FencView.vim.git
+[submodule "bundle/Align"]
+	path = bundle/Align
+	url = https://github.com/vim-scripts/Align.git
+[submodule "bundle/DrawIt"]
+	path = bundle/DrawIt
+	url = https://github.com/vim-scripts/DrawIt.git
