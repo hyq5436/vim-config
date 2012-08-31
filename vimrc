@@ -41,7 +41,7 @@ set showcmd
 set modeline
 
 " support mouse
-set mouse=a
+set mouse=n
 
 
 " Set to auto read when a file is changed from the outside
@@ -225,8 +225,9 @@ set completeopt=longest,menu
 " => ctags
 """"""""""""""""""""""""""""""
 " ctags -R -f ~/ctags/systags --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i /usr/include /usr/local/include
-" set tags=~/ctags/systags,~/ctags/ffmpeg,~/ctags/axel
-set tags=~/ctags/systags,~/ctags/axel,~/ctags/dlna.tags,~/ctags/busybox.tags,~/ctags/findutils.tags
+" ctags -R -f ~/ctags/platinum.tag --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i ~/dlna/SRC/Platinum-f4d639/
+" set tags=~/ctags/systags,~/ctags/platinum.tag
+set tags=~/ctags/systags,~/ctags/xbmc-air.tag,~/ctags/avahi.tag
 
 """"""""""""""""""""""""""""""
 " => DoxygenToolkit
