@@ -22,10 +22,10 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set cursorline
+" set cursorline
 
 " Sets how many lines of history VIM has to remember
-set history=10000
+set history=900000
 
 " Enable filetype plugin
 filetype plugin on
@@ -41,8 +41,9 @@ set showcmd
 set modeline
 
 " support mouse
-set mouse=n
-
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
 
 " Set to auto read when a file is changed from the outside
 " set autoread
@@ -71,12 +72,12 @@ elseif MySys() == "linux"
     autocmd! bufwritepost vimrc source ~/.vim/vimrc
 endif
 
-
 " miniBufExpl
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplModSelTarget = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -227,7 +228,7 @@ set completeopt=longest,menu
 " ctags -R -f ~/ctags/systags --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i /usr/include /usr/local/include
 " ctags -R -f ~/ctags/platinum.tag --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i ~/dlna/SRC/Platinum-f4d639/
 " set tags=~/ctags/systags,~/ctags/platinum.tag
-set tags=~/ctags/systags,~/ctags/xbmc-air.tag,~/ctags/avahi.tag
+set tags=~/ctags/systags,~/ctags/airplay-receiver.tag
 
 """"""""""""""""""""""""""""""
 " => DoxygenToolkit
@@ -265,17 +266,21 @@ nnoremap <silent> \n :NERDTreeToggle<cr>
 """"""""""""""""""""""""""""""
 " => OmniCppComplete
 """"""""""""""""""""""""""""""
-" let OmniCpp_NamespaceSearch = 0
-" let OmniCpp_GlobalScopeSearch = 1
-" let OmniCpp_ShowAccess = 1
-" let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-" let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-" let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-" let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-" let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" " automatically open and close the popup menu / preview window
-" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-" set completeopt=menuone,menu,longest,preview
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+
+" 自动补全的窗口配色
+hi Pmenu    ctermbg=DarkMagenta    ctermfg=Brown
+hi PmenuSel ctermbg=LightCyan   ctermfg=LightYellow
 
 """""""""""""""""""""""""""""""
 "" => Tagbar
