@@ -33,6 +33,15 @@ filetype indent on
 
 " 在状态栏显示正在输入的命令
 set showcmd 
+set laststatus=2
+set statusline=
+set statusline=%<%F " 文件名
+set statusline+=%w%h%m%r " 选项
+set statusline+=%{fugitive#statusline()} "Git
+set statusline+=%= " Right aligned
+set statusline+=\ %{&fenc!=''?&fenc:&enc}
+set statusline+=\ A=%b\ H=0x%B " ASCII / Hexadecimal value of char
+set statusline+=\ \ %l,%c%V\ %P " line,column
 
 " 关闭/打开配对括号高亮
 "NoMatchParen
@@ -41,9 +50,9 @@ set showcmd
 set modeline
 
 " support mouse
-set mouse=a
+set mouse=n
 set selection=exclusive
-set selectmode=mouse,key
+set selectmode=key
 
 " Set to auto read when a file is changed from the outside
 " set autoread
@@ -228,6 +237,8 @@ set completeopt=longest,menu
 " ctags -R -f ~/ctags/systags --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i /usr/include /usr/local/include
 " ctags -R -f ~/ctags/platinum.tag --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i ~/dlna/SRC/Platinum-f4d639/
 " set tags=~/ctags/systags,~/ctags/platinum.tag
+" only langures: c and cpp
+" ctags -R -f avahi.tag --sort=yes --languages=C,C++ --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q ~/opensource/avahi-0.6.31/
 set tags=~/ctags/systags,~/ctags/airplay-receiver.tag
 
 """"""""""""""""""""""""""""""
@@ -255,7 +266,7 @@ let g:DoxygenToolkit_authorName="hu_yinqiu"
 """"""""""""""""""""""""""""""
 "关闭自动检测
 let g:fencview_autodetect=0
-map <leader>a :FencAutoDetect<cr>
+map <leader>t :FencAutoDetect<cr>
 
 """""""""""""""""""""""""""""""
 "" => NERDTree
@@ -276,7 +287,7 @@ let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+set completeopt=menuone,menu,longest
 
 " 自动补全的窗口配色
 hi Pmenu    ctermbg=DarkMagenta    ctermfg=Brown
@@ -292,7 +303,7 @@ elseif MySys() == "linux"              "设定windows系统中ctags程序的位�
 endif
 let g:tagbar_left = 0                   "在右侧窗口中显示taglist窗口
 let g:tagbar_autoclose = 0              "自动关闭
-let g:tagbar_sort = 0                   "排序
+let g:tagbar_sort = 1                   "排序
 "let g:tagbar_width = 40                "tagbar宽度
 nmap \t :TagbarToggle<CR>
 "autocmd FileType c,cpp,java nested :TagbarOpen
