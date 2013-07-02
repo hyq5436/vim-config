@@ -16,9 +16,6 @@
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
 	url = https://github.com/fholgado/minibufexpl.vim.git
-[submodule "bundle/OmniCppComplete"]
-	path = bundle/OmniCppComplete
-	url = https://github.com/vim-scripts/OmniCppComplete.githttps://github.com/vim-scripts/OmniCppComplete.git
 [submodule "bundle/snipMate"]
 	path = bundle/snipMate
 	url = https://github.com/vim-scripts/snipMate.git
@@ -43,3 +40,6 @@
 [submodule "bundle/vim-markdown"]
 	path = bundle/vim-markdown
 	url = git://github.com/tpope/vim-markdown.git
+[submodule "bundle/OmniCppComplete"]
+	path = bundle/OmniCppComplete
+	url = https://github.com/vim-scripts/OmniCppComplete.git
