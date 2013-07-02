@@ -32,16 +32,20 @@ filetype plugin on
 filetype indent on
 
 " 在状态栏显示正在输入的命令
-set showcmd 
-set laststatus=2
-set statusline=
-set statusline=%<%F " 文件名
-set statusline+=%w%h%m%r " 选项
-set statusline+=%{fugitive#statusline()} "Git
-set statusline+=%= " Right aligned
-set statusline+=\ %{&fenc!=''?&fenc:&enc}
-set statusline+=\ A=%b\ H=0x%B " ASCII / Hexadecimal value of char
-set statusline+=\ \ %l,%c%V\ %P " line,column
+if MySys() == "linux"
+
+    set showcmd 
+    set laststatus=2
+    set statusline=
+    set statusline=%<%F " 文件名
+    set statusline+=%w%h%m%r " 选项
+    set statusline+=%{fugitive#statusline()} "Git
+    set statusline+=%= " Right aligned
+    set statusline+=\ %{&fenc!=''?&fenc:&enc}
+    set statusline+=\ A=%b\ H=0x%B " ASCII / Hexadecimal value of char
+    set statusline+=\ \ %l,%c%V\ %P " line,column
+
+endif
 
 " 关闭/打开配对括号高亮
 "NoMatchParen
@@ -148,7 +152,11 @@ else
 endif
 colorscheme desert
 
-set encoding=utf-8
+if MySys() == "windows"
+    set encoding=cp936
+else
+    set encoding=utf-8
+endif
 set fileencoding=utf-8
 set fileencodings=usc-bom,utf-8,gb2312,gb18030,big5,euc-jp,enc-kr,latin1
 set fileformat=unix
