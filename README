@@ -1,7 +1,7 @@
 KEYBOARD
 a.vim               :A                                      switch between .cpp and .h
 Align               :'a,'b Align=
-Bundle              :BundleList                             list configured bundles
+Bundle              :BundleList                             list configured bundles
 FencView            map <leader>a :FencAutoDetect<cr>
 The-NERD-tree       :NERDTree
 Tagbar              nmap \t :TagbarToggle<CR>     
@@ -40,3 +40,6 @@ DrawIt              <leader>di <leader>ds                   ascii art
 提交更改
     cd ~/.vim
     git push origin master
+
+windows下的配置: 
+    1. 将bundle文件夹拷贝到 Vim/vimfiles 目录下
