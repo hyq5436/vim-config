@@ -6,11 +6,10 @@ FencView            map <leader>a :FencAutoDetect<cr>
 The-NERD-tree       :NERDTree
 Tagbar              nmap \t :TagbarToggle<CR>     
                     map <leader>e                           edit vimrc file
-                    nmap <leader>w :w<cr>                   save file
-                    nmap <leader>x :x<cr>                   save file and exist
                     set pastetoggle=<leader>a
                     nnoremap<silent> \n :NERDTreeToggle
 DrawIt              <leader>di <leader>ds                   ascii art
+ctags cscope        <leader>tu                              update ctags and cscope
 
 删除submodule:
     1. 从 .gitmodule 文件里面删掉关于 bundle/Tagbar的配置信息

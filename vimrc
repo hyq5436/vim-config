@@ -10,7 +10,7 @@ call pathogen#helptags()
 " => function
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Platform
-function MySys()
+function! MySys()
     if has("win32")
         return "windows"
     else
@@ -32,20 +32,16 @@ filetype plugin on
 filetype indent on
 
 " 在状态栏显示正在输入的命令
-if MySys() == "linux"
-
-    set showcmd 
-    set laststatus=2
-    set statusline=
-    set statusline=%<%F " 文件名
-    set statusline+=%w%h%m%r " 选项
-    set statusline+=%{fugitive#statusline()} "Git
-    set statusline+=%= " Right aligned
-    set statusline+=\ %{&fenc!=''?&fenc:&enc}
-    set statusline+=\ A=%b\ H=0x%B " ASCII / Hexadecimal value of char
-    set statusline+=\ \ %l,%c%V\ %P " line,column
-
-endif
+set showcmd
+set laststatus=2
+set statusline=
+set statusline=%<%F " 文件名
+set statusline+=%w%h%m%r " 选项
+set statusline+=%{fugitive#statusline()} "Git
+set statusline+=%= " Right aligned
+set statusline+=\ %{&fenc!=''?&fenc:&enc}
+set statusline+=\ A=%b\ H=0x%B " ASCII / Hexadecimal value of char
+set statusline+=\ \ %l,%c%V\ %P " line,column
 
 " 关闭/打开配对括号高亮
 "NoMatchParen
@@ -66,10 +62,6 @@ set selectmode=key
 let mapleader = ";"
 let g:mapleader = ";"
 
-" Fast saving
-nmap <leader>w :w<cr>
-nmap <leader>x :x<cr>
-
 " Fast editing of the _vimrc
 if MySys() == "windows"
     map <leader>e :e! $vim/_vimrc<cr>
@@ -82,7 +74,7 @@ if MySys() == "windows"
     autocmd! bufwritepost _vimrc source $vim/_vimrc
 elseif MySys() == "linux"
     autocmd! bufwritepost .vimrc source ~/.vimrc
-    autocmd! bufwritepost vimrc source ~/.vim/vimrc
+    autocmd! bufwritepost vimrc source ~/.vimrc
 endif
 
 " miniBufExpl
@@ -222,7 +214,7 @@ au FileType python map <buffer> <leader>C ?class
 au FileType python map <buffer> <leader>D ?def
 
 """"""""""""""""""""""""""""""
-" => Plugins config 
+" => Plugins config
 """"""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""
 " => Bash-support
@@ -233,7 +225,7 @@ au FileType python map <buffer> <leader>D ?def
 """"""""""""""""""""""""""""""
 let g:completekey = "<C-b>"
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-set completeopt=longest,menu 
+set completeopt=longest,menu
 
 """"""""""""""""""""""""""""""
 " => C-support
@@ -243,18 +235,16 @@ set completeopt=longest,menu
 " => ctags
 """"""""""""""""""""""""""""""
 " ctags -R -f ~/ctags/systags --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i /usr/include /usr/local/include
-" ctags -R -f ~/ctags/platinum.tag --sort=yes --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q --python-kinds=-i ~/dlna/SRC/Platinum-f4d639/
-" set tags=~/ctags/systags,~/ctags/platinum.tag
 " only langures: c and cpp
 " ctags -R -f avahi.tag --sort=yes --languages=C,C++ --c-kinds=+px --c++-kinds=+px --fields=+iaS --extra=+q ~/opensource/avahi-0.6.31/
-set tags=~/ctags/systags,~/ctags/airplay-receiver.tag
+set tags=~/ctags/systags
 
 """"""""""""""""""""""""""""""
 " => DoxygenToolkit
 """"""""""""""""""""""""""""""
 let g:DoxygenToolkit_commentType = "C++"
-" Add name of function/class/struct... after pre brief tag if you want 
-let g:DoxygenToolkit_briefTag_className = "yes" 
+" Add name of function/class/struct... after pre brief tag if you want
+let g:DoxygenToolkit_briefTag_className = "yes"
 let g:DoxygenToolkit_briefTag_structName = "no"
 let g:DoxygenToolkit_briefTag_enumName = "no"
 let g:DoxygenToolkit_briefTag_namespaceName = "no"
@@ -314,4 +304,104 @@ let g:tagbar_autoclose = 0              "自动关闭
 let g:tagbar_sort = 1                   "排序
 "let g:tagbar_width = 40                "tagbar宽度
 nmap \t :TagbarToggle<CR>
-"autocmd FileType c,cpp,java nested :TagbarOpen
+
+" cscope 绑定
+if has("cscope")
+    set csto=1
+    set cst
+    set nocsverb
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+endif
+
+"quickfix 配置"
+nmap <leader>q :cw<cr>
+nmap <leader>n :cn<cr>
+
+" 更新ctags和cscope索引
+" href: http://www.vimer.cn/2009/10/把vim打造成一个真正的ide2.html
+" 稍作修改，提取出DeleteFile函数，修改ctags和cscope执行命令
+map <leader>tu :call Do_CsTag()<cr>
+function! Do_CsTag()
+    if b:ctags_and_cscope_place == ""
+        let dir = expand("%:p:h")
+        let b:ctags_and_cscope_place = dir
+    else
+        let dir = b:ctags_and_cscope_place
+    endif
+
+    "先删除已有的tags和cscope文件，如果存在且无法删除，则报错。
+    if ( DeleteFile(dir, "tags") )
+        return
+    endif
+    if ( DeleteFile(dir, "cscope.files") )
+        return
+    endif
+    if ( DeleteFile(dir, "cscope.out") )
+        return
+    endif
+
+    if(executable('ctags'))
+        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q " . dir
+    endif
+    if(executable('cscope') && has("cscope") )
+        if MySys() == "windows"
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+        else
+            silent! execute "!find . -iname '*.[ch]' -o -name '*.cpp' > cscope.files"
+        endif
+        silent! execute "!cscope -b"
+        execute "normal :"
+        if filereadable("cscope.out")
+            execute "cs add cscope.out"
+        endif
+    endif
+    " 刷新屏幕
+    execute "redr!"
+endfunction
+
+function! DeleteFile(dir, filename)
+    if filereadable(a:filename)
+        if MySys() == "windows"
+            let ret = delete(a:dir."\\".a:filename)
+        else
+            let ret = delete("./".a:filename)
+        endif
+        if (ret != 0)
+            echohl WarningMsg | echo "Failed to delete ".a:filename | echohl None
+            return 1
+        else
+            return 0
+        endif
+    endif
+    return 0
+endfunction
+
+function! AutoLoadCTagsAndCScope()
+    let max = 5
+    let dir = expand("%:p:h")
+    let i = 0
+    let break = 0
+    let b:ctags_and_cscope_place =""
+    while isdirectory(dir) && i < max
+        if filereadable(dir . '/cscope.out')
+            execute 'cs add ' . dir . '/cscope.out'
+            let break = 1
+        endif
+        if filereadable(dir . '/tags')
+            execute 'set tags +=' . dir . '/tags'
+            let break = 1
+        endif
+        if break == 1
+            execute 'lcd ' . dir
+            let b:ctags_and_cscope_place = getcwd()
+            break
+        endif
+        let dir = dir . '/..'
+        let i = i + 1
+    endwhile
+endf
+" nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
+"call AutoLoadCTagsAndCScope()
+
+" 自动加载tags和cscope.out
+autocmd BufReadPost,FileReadPost *.[chCH],*.cc,*.hh,*.[ch]xx call AutoLoadCTagsAndCScope()
